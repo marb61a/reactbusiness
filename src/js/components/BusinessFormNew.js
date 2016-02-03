@@ -26,9 +26,39 @@ var BusinessFormNew = React.createClass({
 					    	<option value="Other">Other</option>
 					    </select>
 				    </div>
+				    <div className="form-group">
+					    <label htmlFor="street_address">Street Address</label>
+					    <input type="text" ref="street" className="form-control" placeholder="Street Address" />
+					</div>
+                    <div className="form-group">
+                        <label htmlFor="city">City</label>
+                        <input type="text" ref="city" className="form-control" placeholder="City" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="state">State</label>
+                        <input type="text" ref="state" className="form-control" placeholder="State" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="zipcode">Zipcode</label>
+                        <input type="text" ref="zipcode" className="form-control" placeholder="Zipcode" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="phone">Phone Number</label>
+                        <input type="text" ref="phone" className="form-control" placeholder="Phone Number" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" ref="email" className="form-control" placeholder="Email" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        <textarea ref="description" className="form-control" placeholder="Description" />
+                    </div>
+					   
+				    <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
-        )
+        );
     }
 });
 
