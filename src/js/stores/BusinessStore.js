@@ -13,7 +13,37 @@ var _businesses = {
 };
 
 var BusinessStore = assign({}, EventEmitter.prototype, {
+    getBusinesses : function(){
+        return _businesses;
+    },
     
+    addChangeListener : function(callback){
+		this.on('change', callback);
+	},
+	
+	removeChangeListener : function(callback){
+		this.removeListener('change', callback);
+	},
+    
+    emitChange : function(){
+		this.emit(CHANGE_EVENT);
+	}
+});
+
+AppDispatcher.register(function(payload){
+    var action = payload.action;
+    
+    switch(action.actionType){
+        case AppConstants.RECEIVE_ITEMS:
+			console.log('Receiving Items...');
+			_businesses.list = action.items;
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		default :
+		    // NO-OP
+    }
+    
+    return true;
 });
 
 module.exports = BusinessStore;
