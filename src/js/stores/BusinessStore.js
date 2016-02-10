@@ -39,6 +39,23 @@ AppDispatcher.register(function(payload){
 			_businesses.list = action.items;
 			BusinessStore.emit(CHANGE_EVENT);
 		break;
+		
+		case AppConstants.NEW_ITEM:
+			_businesses.mainState = 'new';
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
+		case AppConstants.CANCEL_ITEM:
+			_businesses.mainState = 'list';
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
+		case AppConstants.EXTEND_ITEM:
+			_businesses.showExtended = true;
+			_businesses.selectedId = action.itemId;
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
 		default :
 		    // NO-OP
     }
