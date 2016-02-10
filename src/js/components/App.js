@@ -8,7 +8,10 @@ var Navbar = require('./Navbar');
 
 function getAppState(){
     return{
-        
+        businesses: BusinessStore.getBusinesses().list,
+		mainState: BusinessStore.getBusinesses().mainState,
+		showExtended: BusinessStore.getBusinesses().showExtended,
+		selectedId: BusinessStore.getBusinesses().selectedId
     };
 }
 
@@ -16,26 +19,42 @@ var App = React.createClass({
     getInitialState: function(){
 		return getAppState();
 	},
+	
 	componentDidMount: function(){
-		
+		BusinessStore.addChangeListener(this._onChange);	
 	},
+	
 	componentUnmount: function(){
-		
-	}, 
+		BusinessStore.removeChangeListener(this._onChange);
+	},
+	
 	render : function(){
+		if(this.state.mainState === 'new'){
+			var businessForm = <BusinessFormNew />;
+		}else if(this.state.mainState === 'edit'){
+			var businessForm = <BusinessFormEdit />;
+		} else if(this.state.mainState === 'list'){
+			var businessList = <BusinessList showExtended={this.state.showExtended} selectedId={this.state.selectedId} businesses={this.state.businesses} />;
+		}
+		
 	    return(
 	        <div className="wrapper">
-				<Navbar />
+				<Navbar mainState = {this.state.mainState}/>
 				<div className="container">
 					<div className="row">
 						<div className="col-12-md">
-							<BusinessFormNew />
-							<BusinessList />
+							{businessForm}
+							{businessList}
 						</div>
 					</div>
 				</div>
 			</div>
 	    );
+	},
+	
+	// Update view state when change is received
+	_onChange: function(){
+		this.setState(getAppState());
 	}
 });
 
