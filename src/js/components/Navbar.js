@@ -4,6 +4,14 @@ var BusinessStore = require('../stores/BusinessStore');
 
 var Navbar = React.createClass({
     render : function(){
+    	var newLink = '';
+		var homeLink = '';
+		if(this.props.mainState === 'list'){
+			homeLink = 'active';
+		} else if(this.props.mainState === 'new'){
+			newLink = 'active';
+		}
+    	
         return(
             <div>
                 <nav className="navbar navbar-default">
@@ -27,7 +35,16 @@ var Navbar = React.createClass({
 			    </nav>
             </div>
         );
-    }
+    },
+    
+    newItemClick: function(){
+		AppActions.newItem();
+	},
+	
+	homeItemClick: function(){
+		AppActions.cancelItem();
+	}
+	
 });
 
 
