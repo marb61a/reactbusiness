@@ -26,6 +26,19 @@ var AppActions = {
 			actionType: AppConstants.EXTEND_ITEM,
 			itemId: itemId
 		});
+	},
+	
+	saveItem: function(item){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.SAVE_ITEM,
+			item: item
+		});
+	},
+	removeItem: function(itemId){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.REMOVE_ITEM,
+			itemId: itemId
+		});
 	}
 };
 
