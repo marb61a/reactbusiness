@@ -8,8 +8,10 @@ var CHANGE_EVENT = 'change';
 
 // Define Store
 var _businesses = {
-    list : [],
-    mainState : 'list'
+	list:[],
+	mainState: 'list',
+	showExtended: false,
+	selectedId: false
 };
 
 var BusinessStore = assign({}, EventEmitter.prototype, {
@@ -27,6 +29,17 @@ var BusinessStore = assign({}, EventEmitter.prototype, {
     
     emitChange : function(){
 		this.emit(CHANGE_EVENT);
+	},
+	
+	generateId: function(){
+		var id = '';
+		var possible = '0123456789';
+
+		for(var i = 0; i < 5; i++){
+			id += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+
+		return id;
 	}
 });
 
@@ -53,6 +66,16 @@ AppDispatcher.register(function(payload){
 		case AppConstants.EXTEND_ITEM:
 			_businesses.showExtended = true;
 			_businesses.selectedId = action.itemId;
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
+		case AppConstants.SAVE_ITEM:
+			console.log('Saving Item...');
+			action.item.id = BusinessStore.generateId();
+			// Add through API
+			AppAPI.saveItem(action.item);
+			_businesses.list.push(action.item);
+			_businesses.mainState = 'list';
 			BusinessStore.emit(CHANGE_EVENT);
 		break;
 		
