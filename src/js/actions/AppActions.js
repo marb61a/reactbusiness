@@ -21,6 +21,13 @@ var AppActions = {
 		});
 	},
 	
+	editItem: function(itemId){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.EDIT_ITEM,
+			itemId: itemId
+		});
+	},
+	
 	extendItem: function(itemId){
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.EXTEND_ITEM,
@@ -39,7 +46,21 @@ var AppActions = {
 			actionType: AppConstants.REMOVE_ITEM,
 			itemId: itemId
 		});
-	}
+	},
+	
+	receiveItem: function(item){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.RECEIVE_ITEM,
+			item: item
+		});
+	},
+	
+	updateItem: function(item){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.UPDATE_ITEM,
+			item: item
+		});
+	},
 };
 
 module.exports = AppActions;
