@@ -11,7 +11,8 @@ function getAppState(){
         businesses: BusinessStore.getBusinesses().list,
 		mainState: BusinessStore.getBusinesses().mainState,
 		showExtended: BusinessStore.getBusinesses().showExtended,
-		selectedId: BusinessStore.getBusinesses().selectedId
+		selectedId: BusinessStore.getBusinesses().selectedId,
+		selected: BusinessStore.getBusinesses().selected
     };
 }
 
@@ -50,6 +51,12 @@ var App = React.createClass({
 				</div>
 			</div>
 	    );
+	},
+	
+	onEditChange: function(newState, fieldName){
+		var selected = this.state.selected;
+		selected[fieldName] = newState;
+		this.setState({selected:selected});
 	},
 	
 	// Update view state when change is received
