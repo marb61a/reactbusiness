@@ -11,7 +11,21 @@ var _businesses = {
 	list:[],
 	mainState: 'list',
 	showExtended: false,
-	selectedId: false
+	selectedId: false,
+	selected: {
+		id:'',
+		name: '',
+		category: '',
+		address:{
+			street: '',
+			city: '',
+			state: '',
+			zipcode: ''
+		},
+		phone: '',
+		email: '',
+		description: ''
+	}
 };
 
 var BusinessStore = assign({}, EventEmitter.prototype, {
@@ -76,6 +90,14 @@ AppDispatcher.register(function(payload){
 			AppAPI.saveItem(action.item);
 			_businesses.list.push(action.item);
 			_businesses.mainState = 'list';
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
+		case AppConstants.REMOVE_ITEM:
+			console.log('Removing Item...');
+			var index = _businesses.list.findIndex(x => x.id === action.itemId);
+			_businesses.list.splice(index, 1);
+			AppAPI.removeItem(action.itemId);
 			BusinessStore.emit(CHANGE_EVENT);
 		break;
 		
