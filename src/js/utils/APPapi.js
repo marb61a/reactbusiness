@@ -21,6 +21,26 @@ module.exports = {
 			}
 		}
 		localStorage.setItem('businesses', JSON.stringify(items));
+	},
+	
+	getItem : function(itemId){
+		var items = JSON.parse(localStorage.getItem('businesses'));
+		for(i = 0; i <items.length; i++){
+			if(items[i].id == itemId){
+				AppActions.receiveItem(items[i]);
+			}
+		}
+	},
+	
+	updateItem : function(item){
+		var items = JSON.parse(localStorage.getItem('businesses'));
+		for(i = 0; i <items.length; i++){
+			if(items[i].id == item.id){
+				items.splice(i, 1);
+				items.push(item);
+			}
+		}
+		localStorage.setItem('businesses', JSON.stringify(items));
 	}
 	
 };
