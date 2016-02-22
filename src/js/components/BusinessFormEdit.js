@@ -46,6 +46,38 @@ var BusinessFormEdit = React.createClass({
 						    </label>
 						    <input type="text" ref="city" className="form-control" onChange={this.handleChange.bind(this, 'city')} value={this.props.selected.address.city} placeholder="City" />
 					  	</div>
+					  	<div className="form-group">
+						    <label htmlFor="state">
+						    	State
+						    </label>
+						    <input type="text" ref="state" className="form-control" onChange={this.handleChange.bind(this, 'state')} value={this.props.selected.address.state} placeholder="State" />
+						</div>
+						<div className="form-group">
+							<label htmlFor="zipcode">
+								Zipcode
+							</label>
+							<input type="text" ref="zipcode" className="form-control" onChange={this.handleChange.bind(this, 'zipcode')} value={this.props.selected.address.zipcode} placeholder="Zipcode" />
+						</div>
+						<div className="form-group">
+							<label htmlFor="phone">
+								Phone Number
+							</label>
+							<input type="text" ref="phone" className="form-control" onChange={this.handleChange.bind(this, 'phone')} value={this.props.selected.phone} placeholder="Phone Number" />
+						</div>
+						<div className="form-group">
+							<label htmlFor="email">
+								Email
+							</label>
+							<input type="email" ref="email" className="form-control" onChange={this.handleChange.bind(this, 'email')} value={this.props.selected.email} placeholder="Email" />
+						</div>
+						<div className="form-group">
+							<label htmlFor="description">
+								Description
+							</label>
+							<textarea ref="description" className="form-control" placeholder="Description">{this.props.selected.description}</textarea>
+						</div>
+					   
+					  <button type="submit" className="btn btn-primary">Submit</button>
 					</form>
 				</div>
 			);
