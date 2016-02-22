@@ -81,6 +81,34 @@ var BusinessFormEdit = React.createClass({
 					</form>
 				</div>
 			);
+	},
+	
+	handleChange: function(fieldName, event){
+		var newState = event.target.value;
+		var selected = this.state.selected;
+		selected.name = newState;
+		this.setState({selected: selected});
+		this.props.callbackParent(newState, fieldName);
+	},
+	
+	handleSubmit : function(e){
+		e.preventDefault();
+		var item = {
+			id: this.props.selected.id,
+			name: this.refs.name.value.trim(),
+			category: this.refs.category.value.trim(),
+			address: {
+				street: this.refs.street.value.trim(),
+				city: this.refs.city.value.trim(),
+				state: this.refs.state.value.trim(),
+				zipcode: this.refs.zipcode.value.trim(),
+			},
+			phone: this.refs.phone.value.trim(),
+			email: this.refs.email.value.trim(),
+			description: this.refs.description.value.trim()
+		};
+		
+		AppActions.updateItem(item);
 	}
 });
 
