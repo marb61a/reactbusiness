@@ -59,7 +59,25 @@ var BusinessFormNew = React.createClass({
                 </form>
             </div>
         );
-    }
+    },
+    
+	handleSubmit: function(e){
+		e.preventDefault();
+		var item = {
+			name: this.refs.name.value.trim(),
+			category: this.refs.category.value.trim(),
+			address: {
+				street: this.refs.street.value.trim(),
+				city: this.refs.city.value.trim(),
+				state: this.refs.state.value.trim(),
+				zipcode: this.refs.zipcode.value.trim(),
+			},
+			phone: this.refs.phone.value.trim(),
+			email: this.refs.email.value.trim(),
+			description: this.refs.description.value.trim()
+		}
+		AppActions.saveItem(item);
+	}
 });
 
 module.exports = BusinessFormNew;

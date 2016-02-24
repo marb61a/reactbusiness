@@ -33,6 +33,10 @@ var BusinessStore = assign({}, EventEmitter.prototype, {
         return _businesses;
     },
     
+    getBusiness: function(id){
+		AppAPI.getItem(id);
+	},
+	
     addChangeListener : function(callback){
 		this.on('change', callback);
 	},
