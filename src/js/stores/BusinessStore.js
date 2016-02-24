@@ -101,6 +101,28 @@ AppDispatcher.register(function(payload){
 			BusinessStore.emit(CHANGE_EVENT);
 		break;
 		
+		case AppConstants.EDIT_ITEM:
+			_businesses.mainState = 'edit';
+			_businesses.selectedId = action.itemId;
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
+		case AppConstants.RECEIVE_ITEM:
+			_businesses.selected = action.item;
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
+		case AppConstants.UPDATE_ITEM:
+			console.log('Updating Item..');
+			var index = _businesses.list.findIndex(x => x.id === action.itemId);
+			_businesses.list.splice(index, 1);
+			// Update through API
+			AppAPI.updateItem(action.item);
+			_businesses.list.push(action.item);
+			_businesses.mainState = 'list';
+			BusinessStore.emit(CHANGE_EVENT);
+		break;
+		
 		default :
 		    // NO-OP
     }
